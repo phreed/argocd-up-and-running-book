@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: mysql
+    app: pricelist-db
     tier: database
   name: pricelist-db-svc
   annotations:
@@ -14,7 +14,7 @@ spec:
       protocol: TCP
       targetPort: 3306
   selector:
-    app: mysql
+    app: pricelist-db
     tier: database
 status:
   loadBalancer: {}
