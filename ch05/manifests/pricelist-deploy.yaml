@@ -4,8 +4,12 @@ metadata:
   labels:
     app: pricelist
     tier: frontend
-  name: pricelist
+    oldname: pricelist
+    oldfile: pricelist-deploy.yaml
+    newfile: pricelist-deploy.yaml
+  name: pricelist-deploy
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "3"
 spec:
   replicas: 1
@@ -21,27 +25,27 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: quay.io/redhatworkshops/pricelist:latest
-        name: pricelist
-        env:
-        - name: MYSQL_DATABASE
-          value: pricelist
-        - name: MYSQL_PASSWORD
-          value: pricelist
-        - name: MYSQL_USER
-          value: pricelist
-        - name: MYSQL_SERVICE_HOST
-          value: mysql
-        - name: MYSQL_SERVICE_PORT
-          value: "3306"
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 2
-        livenessProbe:
-          tcpSocket:
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 2
+        - image: quay.io/redhatworkshops/pricelist:latest
+          name: pricelist
+          env:
+            - name: MYSQL_DATABASE
+              value: pricelist
+            - name: MYSQL_PASSWORD
+              value: pricelist
+            - name: MYSQL_USER
+              value: pricelist
+            - name: MYSQL_SERVICE_HOST
+              value: pricelist-db-svc
+            - name: MYSQL_SERVICE_PORT
+              value: "3306"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 2
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 2

@@ -1,7 +1,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pricelist-postdeploy
+  labels:
+    oldname: pricelist-postdeploy
+    oldfile: pricelist-job.yaml
+    newfile: pricelist-schema.yaml
+  name: pricelist-schema
   annotations:
     argocd.argoproj.io/sync-wave: "0"
     argocd.argoproj.io/hook: PostSync
@@ -11,12 +15,12 @@ spec:
     metadata:
     spec:
       containers:
-      - command:
-        - /bin/bash
-        - -c
-        - |
-          until [ $(curl -s -o /dev/null -w "%{http_code}" http://pricelist:8080/create_database.php) -eq 200 ]; do sleep 5; done
-          curl -s http://pricelist:8080/create_database.php
-        image: quay.io/redhatworkshops/pricelist:latest
-        name: pricelist-postdeploy
+        - command:
+            - /bin/bash
+            - -c
+            - |
+              until [ $(curl -s -o /dev/null -w "%{http_code}" http://pricelist-svc.pricelist:8080/create_database.php) -eq 200 ]; do sleep 5; done
+              curl -s http://pricelist-svc.pricelist:8080/create_database.php
+          image: quay.io/redhatworkshops/pricelist:latest
+          name: pricelist-postdeploy
       restartPolicy: Never

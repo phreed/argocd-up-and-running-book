@@ -4,14 +4,18 @@ metadata:
   labels:
     app: mysql
     tier: database
-  name: mysql
+    oldname: mysql
+    oldfile: pricelist-db-svc.yaml
+    newfile: pricelist-db-svc.yaml
+  name: pricelist-db-svc
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "2"
 spec:
   ports:
-  - port: 3306
-    protocol: TCP
-    targetPort: 3306
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
   selector:
     app: mysql
     tier: database
