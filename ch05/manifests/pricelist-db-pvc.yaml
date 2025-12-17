@@ -1,10 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  labels:
-    oldname: pricelist-db-pvc
-    oldfile: pricelist-db-pvc.yaml
-    newfile: pricelist-db-pvc.yaml
+  labels: {}
   name: pricelist-db-pvc
   annotations:
     argocd.argoproj.io/hook: Sync

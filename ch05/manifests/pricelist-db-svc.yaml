@@ -4,9 +4,6 @@ metadata:
   labels:
     app: mysql
     tier: database
-    oldname: mysql
-    oldfile: pricelist-db-svc.yaml
-    newfile: pricelist-db-svc.yaml
   name: pricelist-db-svc
   annotations:
     argocd.argoproj.io/hook: Sync

@@ -4,9 +4,6 @@ metadata:
   labels:
     app: pricelist
     tier: frontend
-    oldname: pricelist
-    oldfile: pricelist-svc.yaml
-    newfile: pricelist-svc.yaml
   name: pricelist-svc
   annotations:
     argocd.argoproj.io/hook: Sync
