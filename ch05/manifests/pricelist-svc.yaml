@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: pricelist
+    app: pricelist-app
     tier: frontend
   name: pricelist-svc
   annotations:
@@ -14,7 +14,7 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: pricelist
+    app: pricelist-app
     tier: frontend
 status:
   loadBalancer: {}

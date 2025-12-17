@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: pricelist
+    app: pricelist-app
     tier: frontend
   name: pricelist-deploy
   annotations:
@@ -12,13 +12,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pricelist
+      app: pricelist-app
       tier: frontend
   strategy: {}
   template:
     metadata:
       labels:
-        app: pricelist
+        app: pricelist-app
         tier: frontend
     spec:
       containers:
